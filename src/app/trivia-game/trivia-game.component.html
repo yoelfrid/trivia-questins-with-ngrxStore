@@ -1,0 +1,13 @@
+<p>trivia-game works!</p>
+
+
+<div *ngIf="questionsAndAnswer.length">
+    <p-carousel  [value]="questionsAndAnswer"   [numVisible]="1" [numScroll]="1"  [circular]="false">
+    
+       <ng-template let-question pTemplate="item">
+           <app-trivia-slide [triviaQuestion]="question" (finish)="nextQuestion($event)"></app-trivia-slide>
+       </ng-template>
+    
+    </p-carousel>  
+</div>
+

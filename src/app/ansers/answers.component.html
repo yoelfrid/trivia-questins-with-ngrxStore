@@ -1,0 +1,30 @@
+<p>ansers works!</p>
+<!-- <div>{{count}}</div> -->
+
+<div>
+    <h1>שאלה</h1>
+    <!-- {{getText(correntQustion.results[0].question)}}  -->
+  {{correntQustions}}
+  </div>
+
+<h1>תשובות</h1>
+ 
+ <div *ngFor="let answer of possibleAnswers">
+   
+    <button type="button" pButton label={{getText(answer)}} (click)="onClick(answer)"></button>
+    <br>
+
+</div>  
+
+
+
+ <br><br><br><br>
+ <p-carousel [value]="cars"  [numVisible]="1" [numScroll]="1"  [circular]="true">
+    <ng-template pTemplate="header">      <!-- כותרת  -->
+        <h1>Welcome to Trivia Questions</h1>
+    </ng-template>
+    <ng-template let-car pTemplate="item">
+            <!-- <QuestionSlide question=""></QuestionSlide> -->
+        </ng-template>
+</p-carousel>  
+
