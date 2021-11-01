@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
-import { DataSeviceService } from '../data-sevice.service';
 import { ApiResponse, Question } from '../models/model';
 import { Observable } from 'rxjs';
 import { pluck, map } from 'rxjs/operators';
 import { PrimeNGConfig } from 'primeng/api';
+import { DataSeviceService } from '../services/data-sevice.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-trivia-game',
@@ -13,7 +14,7 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class TriviaGameComponent implements OnInit {
 
-  constructor(private dataSreve: DataSeviceService, private primengConfig: PrimeNGConfig) { }
+  constructor(private dataSreve: DataSeviceService, private primengConfig: PrimeNGConfig,private store:Store) { }
 
   @ViewChild(Carousel) carousel: Carousel;
   questionsAndAnswer: Question[] = []
@@ -23,6 +24,7 @@ export class TriviaGameComponent implements OnInit {
   someCorrectAnswers = 0
   someIncorrectAnswers = 0
   someTimeOut = 0
+  
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     // this.loadQuestions();
@@ -31,18 +33,8 @@ export class TriviaGameComponent implements OnInit {
       this.questionsAndAnswer = [...event];
       console.log(event);
     })
-    this.carousel.navForward(1);
+    // this.carousel.navForward(1);
   }
-
-  // קבלת השאלות מהסרוויס ואתחול השאלה הראשונה
-  // async loadQuestions() {
-
-  //   this.questionsAndAnswer = await this.dataSreve.getUniquQuestion(20);
-  //   // this.dataSreve.questions$.subscribe(eventw=>{
-  //   //   console.log(eventw);
-  //   this.nextQuestion(event);
-  // }
-
 
   // העלאת שאלה נוספת
   nextQuestion(event: any): void {
@@ -59,12 +51,29 @@ export class TriviaGameComponent implements OnInit {
     this.countQuestion++
     if (this.countQuestion == 20) {
       console.log("You've finished the trivia game");
+      console.log("you heve ",this.someIncorrectAnswers ," Incorrect Answers ", "and " , this.someCorrectAnswers ,"Correct Answers");
 
     }
     // this.carousel.navForward(1);
   }
 
 }
+
+
+
+  // קבלת השאלות מהסרוויס ואתחול השאלה הראשונה
+  // async loadQuestions() {
+
+  //   this.questionsAndAnswer = await this.dataSreve.getUniquQuestion(20);
+  //   // this.dataSreve.questions$.subscribe(eventw=>{
+  //   //   console.log(eventw);
+  //   this.nextQuestion(event);
+  // }
+
+
+  
+
+
 
 
 

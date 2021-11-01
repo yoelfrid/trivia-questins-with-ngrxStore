@@ -1,0 +1,76 @@
+// export class DataSeviceService {
+//     // count = 0
+//     constructor(private http: HttpClient) {
+//       this.setQuestions()
+//     }
+  
+//     public questions$: Subject<Question[]> = new Subject<Question[]>()
+  
+//     // private partQuestions: Subject<ApiResponse[]> = new Subject<ApiResponse[]>()
+  
+//     private allQuestions: Question[] = []
+  
+  
+//     setQuestions() {
+//       if (this.allQuestions.length == 20) { //   כשיש לי את כל השאלות תעשה next
+//         for (let question of this.allQuestions) {
+//           this.sortAllAnswer(question)
+//           this.onAtob(question)
+//         }
+//         return this.questions$.next(this.allQuestions) // ותסיים
+//       }
+//       let subs = this.getQuestions(20 - this.allQuestions.length).subscribe((questions) => {
+//         console.log(questions);
+//         for (let question of questions) {
+//           if (!(this.checkIfExists(question['results'][0].question))) {
+//             // console.log(question['results'][0]);
+  
+//             this.allQuestions.push(question['results'][0])
+//           }
+//         }
+//         this.setQuestions()
+//         subs.unsubscribe()
+//       })
+  
+//     }
+  
+//     checkIfExists(question: string) {
+//       for (let questionObj of this.allQuestions) {
+//         if (question == questionObj.question) {
+//           return true
+//         }
+//       }
+  
+//       return false
+//     }
+  
+//     getQuestions(numberOfQuestions: number) {
+//       let allq = [];
+//       for (let i = 0; i < numberOfQuestions; i++) {
+//         allq.push(this.getOneQuestions())
+//       }
+//       return zip(
+//         ...allq
+//       )
+//     }
+  
+//     getOneQuestions() {
+//       return this.http.get<ApiResponse>('https://opentdb.com/api.php?amount=1&encode=base64&type=multiple')
+//     }
+  
+//     // הוספת תשובה רביעת וערבוב המערך
+//     sortAllAnswer(singleQuestion: Question): Question {
+//       const index = Math.floor(Math.random() * 4)
+//       singleQuestion.incorrect_answers.splice(index, 0, singleQuestion.correct_answer)
+//       return singleQuestion
+//     }
+  
+//     onAtob(singleQuestion: Question) {
+//       singleQuestion.question = atob(singleQuestion.question)
+  
+//       singleQuestion.correct_answer = atob(singleQuestion.correct_answer)
+//       singleQuestion.incorrect_answers = singleQuestion.incorrect_answers.map(x => atob(x));
+  
+//     }
+  
+//   }

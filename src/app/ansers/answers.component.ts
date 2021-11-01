@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
-import { DataSeviceService } from '../data-sevice.service';
+import { DataSeviceService } from '../services/data-sevice.service';
 @Component({
   selector: 'app-answers',
   templateUrl: './answers.component.html',

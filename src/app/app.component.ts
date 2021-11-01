@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSeviceService } from './data-sevice.service';
 import { Observable, interval } from 'rxjs';
 import { ApiResponse } from './models/model';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs'
+import { DataSeviceService } from './services/data-sevice.service';
 
 
 @Component({
@@ -19,80 +19,106 @@ export class AppComponent implements OnInit {
   // correctAnswer: string = ''
   // start: boolean = false
 
-  possibleAnswers: any[] = []   // מערך תשובות שעטבר לקטמפוננטה ילד
-  questions: ApiResponse[] = []
-  correntQustion: any;    // שאלה נוכחית
+  // possibleAnswers: any[] = [] 
+  // questions: ApiResponse[] = []
+  // correntQustion: any;  
 
-  counter = 0;    // counter שמעלה שאלה
-  counteFalse = 0;   // counteFalse   בודק כמה תשובות שגויות עשה בשאלה אחת
-  timer: number;
-  timerLimit = 20;
-  timerSub: Subscription;
+  // counter = 0;    
+  // counteFalse = 0;   
+  // timer: number;
+  // timerLimit = 20;
+  // timerSub: Subscription;
 
   constructor(private dataSreve: DataSeviceService) { }
   
-  numbers = interval(1000).pipe(take(this.timerLimit));
-
   ngOnInit() {
-    this.dataSreve.questions$.subscribe(event =>{
-      console.log(event);
-      
-    })
-  }
-
-
-
-  next() {
-    console.log(this.questions.length);
-    this.counter++
-    this.correntQustion = this.questions[this.counter]
-    console.log(this.correntQustion);
-
 
   }
 
-  getText(an: string) {
-    return atob(an)
-  }
 
-  getData() {
-    this.questions.forEach(element => {
-      element.results[0].category
-    });
 
-  }
 
-  shuffle(array: any[]) {
-    return array.sort(() => Math.random() - 0.5);
 
-  }
 
-  setData(event: string) {
-    console.log(event);
-    if (this.correntQustion != undefined && this.correntQustion.results[0].correct_answer != event) {
-      console.log("false");
-      this.counteFalse++
-      if (this.counteFalse == 3) {
-        this.counter++
-        this.correntQustion = this.questions[this.counter]
-        this.counteFalse = 0
 
-        this.timerSub.unsubscribe();
-        this.timerSub = interval(1000).pipe(take(20))
-          .subscribe(x => this.timer = this.timerLimit - x);
-      }
-    }
-    else if (this.correntQustion != undefined && this.correntQustion.results[0].correct_answer == event) {
-      console.log("true");
-      this.counter++
-      this.correntQustion = this.questions[this.counter]
-      this.counteFalse = 0;
 
-      this.timerSub.unsubscribe();
-      this.timerSub = interval(1000).pipe(take(20))
-        .subscribe(x => this.timer = this.timerLimit - x);
-    }
-  }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // numbers = interval(1000).pipe(take(this.timerLimit));
+
+
+
+
+  // next() {
+  //   console.log(this.questions.length);
+  //   this.counter++
+  //   this.correntQustion = this.questions[this.counter]
+  //   console.log(this.correntQustion);
+  // }
+
+  // getText(an: string) {
+  //   return atob(an)
+  // }
+
+  // getData() {
+  //   this.questions.forEach(element => {
+  //     element.results[0].category
+  //   });
+  // }
+
+  // shuffle(array: any[]) {
+  //   return array.sort(() => Math.random() - 0.5);
+  // }
+
+  // setData(event: string) {
+  //   console.log(event);
+  //   if (this.correntQustion != undefined && this.correntQustion.results[0].correct_answer != event) {
+  //     console.log("false");
+  //     this.counteFalse++
+  //     if (this.counteFalse == 3) {
+  //       this.counter++
+  //       this.correntQustion = this.questions[this.counter]
+  //       this.counteFalse = 0
+
+  //       this.timerSub.unsubscribe();
+  //       this.timerSub = interval(1000).pipe(take(20))
+  //         .subscribe(x => this.timer = this.timerLimit - x);
+  //     }
+  //   }
+  //   else if (this.correntQustion != undefined && this.correntQustion.results[0].correct_answer == event) {
+  //     console.log("true");
+  //     this.counter++
+  //     this.correntQustion = this.questions[this.counter]
+  //     this.counteFalse = 0;
+
+  //     this.timerSub.unsubscribe();
+  //     this.timerSub = interval(1000).pipe(take(20))
+  //       .subscribe(x => this.timer = this.timerLimit - x);
+  //   }
+  // }
 
   // ngOnInit() {
     // this.dataSreve.questionsAndAnsewrs().forEach((question$: Observable<ApiResponse>) => question$.subscribe(res => {
@@ -175,7 +201,6 @@ export class AppComponent implements OnInit {
 
 
 
-}
 
 
 

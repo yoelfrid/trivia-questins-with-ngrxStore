@@ -29,7 +29,7 @@ export class TriviaSlideComponent implements OnInit {
   answerSelected(e: any) {
     console.log(this.counteFalse);
 
-    const correctAnswer = atob(this.triviaQuestion.correct_answer)
+    const correctAnswer = this.triviaQuestion.correct_answer
     if (correctAnswer == e) {
       console.log("תשובה נכונה");
       this.finish.emit({ succsess: true, reason: 'correct answer' })
@@ -40,13 +40,13 @@ export class TriviaSlideComponent implements OnInit {
       this.counteFalse++;
 
       if (this.counteFalse == 3) {
-        console.log("3 פעמים תשובות שגויות");
+        console.log("לחצת 3 תשובות שגויות");
 
         this.finish.emit({ succsess: false, reason: 'incorrect answer' })
         this.counteFalse = 0;
       }
-      // this.finish.emit({ succsess: false, reason: 'incorrect answer'})
     }
+          // this.finish.emit({ succsess: false, reason: 'time out'})
   }
 
 

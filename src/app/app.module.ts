@@ -21,6 +21,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { questionsReducer } from './store/reducer';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,13 +39,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     CarouselModule,
     RippleModule,
     CardModule,
-    // StoreModule.forRoot(fromApp.appReducer),
-    // StoreDevtoolsModule.instrument({logOnly: environment.production}),
-    // EffectsModule.forRoot([QuestionsEffects]),
-
-    // StoreModule.forRoot(fromApp.appReducer),
-    // StoreDevtoolsModule.instrument({logOnly: environment.production}),
-    // EffectsModule.forRoot([QuestionsEffects]),
+ 
+    StoreModule.forRoot(questionsReducer),
+     StoreDevtoolsModule.instrument({logOnly: environment.production}),
+    // EffectsModule.forRoot([Effects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
